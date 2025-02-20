@@ -18,7 +18,8 @@ def sol(centerx:int, centery:int, radius:int):
     arcade.draw_circle_filled(centerx,centery, radius-10, arcade.color.BANANA_YELLOW)
 
 #-----ÁRBOL-----#
-def arbol(troncox, troncoy, hojasy):
+def arbol(troncox, troncoy):
+    hojasy = troncoy + troncoy/19
     arcade.draw_rectangle_filled(troncox, troncoy, troncoy/14.25, troncoy/3.17, arcade.color.DARK_BROWN)
     arcade.draw_rectangle_filled(troncox, hojasy, hojasy/2.5, hojasy/10, arcade.color.CAL_POLY_GREEN)
     arcade.draw_rectangle_filled(troncox, hojasy+hojasy/10, hojasy/3, hojasy/10, arcade.color.CAL_POLY_GREEN)
@@ -35,25 +36,12 @@ def nubes(centerx:int, centery:int, radius):
     arcade.draw_circle_filled(centerx-20, centery, radius, arcade.color.WHITE)
 
 #-----ARBUSTOS-----#
-arcade.draw_circle_filled(690, 100, 19, arcade.color.AMAZON)
-arcade.draw_circle_filled(650, 100, 15, arcade.color.AMAZON)
-arcade.draw_circle_filled(670, 100, 17, arcade.color.AMAZON)
-arcade.draw_circle_filled(670, 110, 18, arcade.color.AMAZON)
 
-arcade.draw_circle_filled(390, 150, 19, arcade.color.AMAZON)
-arcade.draw_circle_filled(350, 150, 15, arcade.color.AMAZON)
-arcade.draw_circle_filled(370, 150, 17, arcade.color.AMAZON)
-arcade.draw_circle_filled(370, 160, 18, arcade.color.AMAZON)
-
-arcade.draw_circle_filled(290, 80, 19, arcade.color.AMAZON)
-arcade.draw_circle_filled(250, 80, 15, arcade.color.AMAZON)
-arcade.draw_circle_filled(270, 80, 17, arcade.color.AMAZON)
-arcade.draw_circle_filled(270, 90, 18, arcade.color.AMAZON)
-
-arcade.draw_circle_filled(90, 100, 19, arcade.color.AMAZON)
-arcade.draw_circle_filled(50, 100, 15, arcade.color.AMAZON)
-arcade.draw_circle_filled(70, 100, 17, arcade.color.AMAZON)
-arcade.draw_circle_filled(70, 110, 18, arcade.color.AMAZON)
+def arbustos(centerx:int, centery:int, radius):
+    arcade.draw_circle_filled(centerx, centery, radius, arcade.color.AMAZON)
+    arcade.draw_circle_filled(centerx-40, centery, radius-3, arcade.color.AMAZON)
+    arcade.draw_circle_filled(centerx-20, centery+15, radius-1, arcade.color.AMAZON)
+    arcade.draw_circle_filled(centerx-20, centery, radius, arcade.color.AMAZON)
 
 #LLAMADAS A FUNCIONES
 
@@ -66,12 +54,20 @@ nubes(500, 500, 27)
 nubes(690, 300, 19)
 nubes(100, 500, 22)
 
+#Arbustos
+arbustos(690, 100, 19)
+arbustos(390, 150, 15)
+arbustos(290, 80, 19)
+arbustos(90, 100, 19)
+arbustos(490, 150, 19)
+
 #arbol
-arbol(80,285,300)
-arbol(400,100,115)
-arbol(300,80,95)
-arbol(210,200,215)
-arbol(130,100,115)
+arbol(80,285)
+arbol(400,100)
+arbol(300,120)
+arbol(210,200,)
+arbol(130,100)
+
 #-----FIN-----#
 arcade.finish_render()
 arcade.run()
