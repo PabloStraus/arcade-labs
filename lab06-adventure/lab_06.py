@@ -11,6 +11,8 @@ class Sala:
 def main():
     Habitaciones = []
     keyB = False
+    keyBa = False
+    keyT = False
     Inicio = Sala("Estas en una sala inicial en la cual solo se encuentra una puerta, en el este, en ella, hay una nota, esta dice 'Si el tesoro quieres buscar, por la mazmorra deberás avanzar'",None,None,None,1)
     Habitaciones.append(Inicio)
 
@@ -29,7 +31,7 @@ def main():
 
 
     Baños = Sala(
-            "Hay una gran piscina en el centro, con agua caliente, puedes ver cientas de burbujas flotando por el baño, en el suelo se encuentra la llave del almacen, en el este se encuentra una puerta  cerrada con una combinacion de 3 digitos",
+            "Hay una gran piscina en el centro, con agua caliente, puedes ver cientas de burbujas flotando por el baño, en el suelo se encuentra la llave del almacen, en el este se encuentra una puerta  cerrada con candado",
             None, 1, None, 4)
     Habitaciones.append(Baños)
 
@@ -50,6 +52,39 @@ def main():
         print(" ")
         next_room = 0
         print(Habitaciones[current_room].description)
+        if keyB == False and current_room == 2:
+            print("Esta puerta esta cerrada con llave")
+            current_room == Habitaciones[1]
+
+
+        if current_room == 3 and keyB == False:
+            respuesta = input("¿Quieres coger la llave? (y/n) ")
+            if respuesta == "y":
+                keyB = True
+            else:
+                keyB = False
+
+        if keyBa == False and current_room == 4:
+            print("Esta puerta esta cerrada con llave")
+            current_room == Habitaciones[3]
+
+        if current_room == 2 and keyB == True and keyBa == False:
+            respuesta = input("¿Quieres coger la llave? (y/n) ")
+            if respuesta == "y":
+                keyBa = True
+            else:
+                keyBa = False
+
+        if keyT == False and current_room == 5:
+            print("Esta puerta esta cerrada con llave")
+            current_room == Habitaciones[2]
+
+        if current_room == 4 and keyBa == True and keyT == False:
+            respuesta = input("¿Quieres coger la llave? (y/n) ")
+            if respuesta == "y":
+                keyT = True
+            else:
+                keyT = False
 
         accion = input("¿Qué quieres hacer? ")
         if accion.lower() == "n" or accion == "north" or accion == "norte":
@@ -87,6 +122,10 @@ def main():
             done = True
         else:
             print("No te he entendido ")
+
+        if current_room == 5:
+            print(Habitaciones[5].description)
+            done = True
 
 
 
