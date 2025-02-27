@@ -1,9 +1,10 @@
 #MONGOLO EL QUE LO LEA
 import arcade
 arcade.open_window(800, 600, "Drawing Example")
-arcade.set_background_color(arcade.color.BABY_BLUE)
+arcade.set_background_color(arcade.color.SKY_BLUE)
 arcade.start_render()
-
+arcade.draw_circle_filled(690, 470, 400, arcade.color.BABY_BLUE)
+arcade.draw_circle_filled(690, 470, 150, arcade.color.LIGHT_SKY_BLUE)
 #-----SUELO-----#
 arcade.draw_lrtb_rectangle_filled(0, 800, 100, 0, arcade.color.BANGLADESH_GREEN)
 arcade.draw_circle_filled(390, 1, 220, arcade.color.BANGLADESH_GREEN)
@@ -44,7 +45,7 @@ def arbustos(centerx:int, centery:int, radius):
     arcade.draw_circle_filled(centerx-20, centery+15, radius-1, arcade.color.AMAZON)
     arcade.draw_circle_filled(centerx-20, centery, radius, arcade.color.AMAZON)
 
-#LLAMADAS A FUNCIONES
+#-----LLAMADAS-----#
 
 #Sol
 sol(690, 470, 80)
@@ -57,17 +58,17 @@ nubes(100, 500, 22)
 
 #Arbustos
 arbustos(690, 100, 19)
-arbustos(390, 150, 15)
-arbustos(290, 80, 19)
-arbustos(90, 100, 19)
+arbustos(290, 40, 19)
+arbustos(80, 100, 19)
+arbustos(490, 150, 19)
 arbustos(490, 150, 19)
 
 #arbol
-arbol(80,285)
+arbol(80,275)
 arbol(400,100)
 arbol(300,120)
 arbol(210,200,)
-arbol(130,100)
+arbol(130,120)
 
 #-----FIN-----#
 arcade.finish_render()
