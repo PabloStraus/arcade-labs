@@ -13,6 +13,17 @@ arcade.draw_circle_filled(690, 1, 150, arcade.color.BANGLADESH_GREEN)
 arcade.draw_circle_filled(590, 1, 150, arcade.color.BANGLADESH_GREEN)
 arcade.draw_circle_filled(80, 1, 250, arcade.color.BANGLADESH_GREEN)
 
+# -----PERSONA-----#
+def persona(centerx:int, centery:int, radius:int):
+    arcade.draw_circle_filled(centerx,centery, radius, arcade.color.YELLOW)
+    arcade.draw_rectangle_filled(centerx, centery - radius, 10, 60, arcade.color.YELLOW)
+    arcade.draw_rectangle_filled(centerx, centery - radius-10, 30, 10, arcade.color.YELLOW)
+    arcade.draw_rectangle_filled(centerx + 5, centery - radius - 30, 20, 10, arcade.color.YELLOW)
+    arcade.draw_rectangle_filled(centerx - 5, centery - radius - 30, 20, 10, arcade.color.YELLOW)
+    arcade.draw_rectangle_filled(centerx - 10, centery - radius - 40, 10, 20, arcade.color.YELLOW)
+    arcade.draw_rectangle_filled(centerx + 10, centery - radius - 40, 10, 20, arcade.color.YELLOW)
+    arcade.draw_circle_filled(centerx,centery, radius-10, arcade.color.BANANA_YELLOW)
+
 
 # -----SOL-----#
 def sol(centerx:int, centery:int, radius:int):
@@ -69,6 +80,9 @@ arbol(400,100)
 arbol(300,120)
 arbol(210,200,)
 arbol(130,120)
+
+#persona
+persona(490, 370, 20)
 
 #-----FIN-----#
 arcade.finish_render()
