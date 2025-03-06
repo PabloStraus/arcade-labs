@@ -6,7 +6,7 @@ import arcade
 # --- Constants ---
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
-MOVEMENT_SPEED = 3
+MOVEMENT_SPEED = 18
 
 # -----PERSONA-----#
 def persona(centerx:int, centery:int, radius:int):
@@ -44,7 +44,7 @@ def arbustos(centerx:int, centery:int, radius):
     arcade.draw_circle_filled(centerx-20, centery+15, radius-1, arcade.color.AMAZON)
     arcade.draw_circle_filled(centerx-20, centery, radius, arcade.color.AMAZON)
 
-class Ball:
+class Persona:
     def __init__(self, position_x, position_y, radius, color1, color2):
 
         # Take the parameters of the init function above,
@@ -74,6 +74,54 @@ class Ball:
                                   self.radius - 5,
                                   self.color2)
 
+class Villano:
+    def __init__(self, position_x, position_y, radius, color1, color2, change_x, change_y):
+
+        # Take the parameters of the init function above,
+        # and create instance variables out of them.
+        self.position_x = position_x
+        self.position_y = position_y
+        self.radius = radius
+        self.color1 = color1
+        self.color2 = color2
+        self.change_x = change_x
+        self.change_y = change_y
+
+    def draw(self):
+        """ Draw the balls with the instance variables we have. """
+        arcade.draw_circle_filled(self.position_x,
+                                  self.position_y,
+                                  self.radius,
+                                  self.color1)
+
+        arcade.draw_rectangle_filled(self.position_x, self.position_y - self.radius, 10, 60, self.color1)
+        arcade.draw_rectangle_filled(self.position_x, self.position_y - self.radius - 10, 30, 10, self.color1)
+        arcade.draw_rectangle_filled(self.position_x + 5, self.position_y - self.radius - 30, 10, 10, self.color1)
+        arcade.draw_rectangle_filled(self.position_x - 5, self.position_y - self.radius - 30, 10, 10, self.color1)
+        arcade.draw_rectangle_filled(self.position_x - 10, self.position_y - self.radius - 40, 10, 20, self.color1)
+        arcade.draw_rectangle_filled(self.position_x + 10, self.position_y - self.radius - 40, 10, 20, self.color1)
+
+        arcade.draw_circle_filled(self.position_x,
+                                  self.position_y,
+                                  self.radius - 5,
+                                  self.color2)
+
+    def on_update(self):
+        # Move the ball
+        self.position_y += self.change_y
+        self.position_x += self.change_x
+
+        if self.position_x < self.radius:
+            self.position_x = self.radius
+
+        if self.position_x > SCREEN_WIDTH - self.radius:
+            self.position_x = SCREEN_WIDTH - self.radius
+
+        if self.position_y < self.radius:
+            self.position_y = self.radius
+
+        if self.position_y > SCREEN_HEIGHT - self.radius:
+            self.position_y = SCREEN_HEIGHT - self.radius
 
 class MyGame(arcade.Window):
     """ Our Custom Window Class"""
@@ -82,9 +130,10 @@ class MyGame(arcade.Window):
         """ Initializer """
 
         # Call the parent class initializer
-        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Lab 7 - User Control",)
+        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "GOD DESTROYER",)
         arcade.set_background_color(arcade.color.SKY_BLUE)
-        self.ball = Ball(50, 50, 20, arcade.color.BLACK, arcade.color.WHITE)
+        self.persona = Persona(50, 50, 20, arcade.color.BLACK, arcade.color.WHITE)
+        self.villano = Villano(100, 100, 20, arcade.color.RED, arcade.color.WHITE, 0, 0)
         self.set_mouse_visible(False)
 
     def on_draw(self):
@@ -121,46 +170,52 @@ class MyGame(arcade.Window):
         arbol(130, 120)
 
 
-        self.ball.draw()
+        self.persona.draw()
+        self.villano.draw()
         arcade.finish_render()
 
         #MONGOLO EL QUE LO LEA
 
+    def on_update(self, delta_time):
+        self.villano.on_update()
+
     def on_mouse_press(self, x, y, button, modifiers):
         """ Called when the user presses a mouse button. """
         if button == arcade.MOUSE_BUTTON_LEFT:
-            print("Left mouse button pressed at", x, y)
+            print("Fiuuuuuum")
+            arcade.set_background_color(arcade.color.RED_DEVIL)
         elif button == arcade.MOUSE_BUTTON_RIGHT:
             print("Right mouse button pressed at", x, y)
+            arcade.set_background_color(arcade.color.SKY_BLUE)
 
     def on_mouse_motion(self, x, y, dx, dy):
         """ Called to update our objects.
         Happens approximately 60 times per second."""
-        self.ball.position_x = x
-        self.ball.position_y = y
+        self.persona.position_x = x
+        self.persona.position_y = y
 
     def on_key_press(self, key, modifiers):
         if key == arcade.key.W:
             print("The 'w' key was hit")
-            self.ball.change_y = MOVEMENT_SPEED
+            self.villano.change_y = MOVEMENT_SPEED
         elif key == arcade.key.A:
             print("The 'a' key was hit")
-            self.ball.change_x = -MOVEMENT_SPEED
+            self.villano.change_x = -MOVEMENT_SPEED
 
         elif key == arcade.key.S:
             print("The 's' key was hit")
-            self.ball.change_y = -MOVEMENT_SPEED
+            self.villano.change_y = -MOVEMENT_SPEED
 
         elif key == arcade.key.D:
             print("The 'd' key was hit")
-            self.ball.change_x = MOVEMENT_SPEED
+            self.villano.change_x = MOVEMENT_SPEED
 
     def on_key_release(self, key, modifiers):
         """ Called whenever a user releases a key. """
-        if key == arcade.key.LEFT or key == arcade.key.RIGHT:
-            self.ball.change_x = 0
-        elif key == arcade.key.UP or key == arcade.key.DOWN:
-            self.ball.change_y = 0
+        if key == arcade.key.A or key == arcade.key.D:
+            self.villano.change_x = 0
+        elif key == arcade.key.W or key == arcade.key.S:
+            self.villano.change_y = 0
 
 def main():
     window = MyGame()
